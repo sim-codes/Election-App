@@ -1,0 +1,16 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="container container-fluid">
+
+  <h2>Add a Polling Unit</h2>
+  <form method="post">
+    {% csrf_token %}
+    <table>
+      {{ form.as_table }}
+    </table>
+    <button class="btn btn-success ml-2" type="submit">Save</button>
+  </form>
+</div>
+  
+{% endblock %}

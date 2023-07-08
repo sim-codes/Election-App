@@ -1,0 +1,31 @@
+{% extends "base.html" %}
+{% block title %}Home{% endblock title %}
+{% block content %}
+
+
+<div class="container">
+    <h2>Election Result for Polling unit 8</h2>           
+    <table class="table table-striped">
+      <thead>
+        <tr>
+          <th>Party Abbreviation</th>
+          <th>Party Score</th>
+          <th>Entered By User</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for result in results %}
+        {% if result.polling_unit_uniqueid == '8' %}
+        <tr>
+          <td>{{ result.party_abbreviation }}</td>
+          <td>{{ result.party_score }}</td>
+          <td>{{ result.entered_by_user }}</td>
+        </tr>
+        {% endif %}
+        {% endfor %}
+        
+      </tbody>
+    </table>
+  </div>
+
+{% endblock content %}

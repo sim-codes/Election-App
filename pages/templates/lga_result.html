@@ -1,0 +1,55 @@
+{% extends "base.html" %}
+{% block title %}Sum Total Result{% endblock title %}
+{% block content %}
+
+<div class="container">
+  <header class="p-3 mb-3 border-bottom">
+  <div class="container">
+    <div class="d-flex flex-wrap align-items-center justify-content-center">
+      <div class="dropdown text-end">
+        <a href="#" class="d-block link-dark text-decoration-none dropdown-toggle" id="dropdownUser1" data-bs-toggle="dropdown" aria-expanded="false">Change LGA</a>
+        <ul class="dropdown-menu text-small" aria-labelledby="dropdownUser1">
+          {% for lga in lga_list %}
+              <li><a class="dropdown-item" href="{% url 'lga_result' lga.lga_id %}">{{lga.lga_name}}</a></li>
+              {% endfor %}
+        </ul>
+      </div>
+    </ul>
+    </div>
+  </div>
+</header>
+</div>
+
+<div class="container">
+    <h2>{{lga.lga_name}} Total Election Result.</h2>           
+    <table class="table table-striped">
+      <thead>
+        <tr>
+          <th>Polling Unit</th>
+          <th>Party Abbreviation</th>
+          <th>Party Score</th>
+          <th>Entered By User</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for pu in pus %}
+        {% with id=pu.uniqueid|slugify %}
+        {% for result in results %}
+        
+        {% if id == result.polling_unit_uniqueid %}
+        <tr>
+          <td>{{ pu.polling_unit_name }}</td>
+          <td>{{ result.party_abbreviation }}</td>
+          <td>{{ result.party_score }}</td>
+          <td>{{ result.entered_by_user }}</td>
+        </tr>
+        {% endif %}
+        {% endfor %}
+        {% endwith %}
+        {% endfor %}
+        
+      </tbody>
+    </table>
+  </div>
+
+{% endblock content %}
